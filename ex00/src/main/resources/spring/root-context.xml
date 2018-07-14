@@ -20,7 +20,17 @@
 		
 		<!-- mybatis는 생략이 가능하다 이유는 협업할때 문제가 생길수도 있고 생략해도 문제가 없음 -->
 		<bean id ="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-			<property name = "dataSource" ref="dataSource"></property>
+			<property name = "dataSource"       ref="dataSource"></property>
 			<property name = "configLocation" value="classpath:mybatis/mybatis-config.xml"></property> 
+			<property name = "mapperLocations" value="classpath:mappers/**/*Mapper.xml"></property> 
 		</bean>
+		
+		<!-- ★db에 연결과 종료를 이곳에서 책임짐 // 또한 destroy-method="clearCache"는 어플리케이션컨텍스트(root-context.xml)이 즉 스프링이 종료가 되면 실행시는 녀석-->
+		<bean id = "sqlSession" class= "org.mybatis.spring.SqlSessionTemplate" destroy-method="clearCache">
+			<constructor-arg name = "sqlSessionFactory" ref="sqlSessionFactory"></constructor-arg>
+		</bean>
+		
+		<!-- context:component-scan은 bean에 등록을 해야함 // base-package안에 팩키지명과 경로를 적어주면됨 -->
+		<context:component-scan base-package="org.zerock.persistence">
+		</context:component-scan>
 </beans>

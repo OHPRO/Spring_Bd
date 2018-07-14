@@ -7,6 +7,7 @@
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
+<!-- servlet-context는 web밑의 bean을 검색 // root-context는 perisistence를 검색-->
 	<!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
 	
 	<!--주석처리할떄는 컨터럴+시프트+슬레시하면 주석처리됨  -->

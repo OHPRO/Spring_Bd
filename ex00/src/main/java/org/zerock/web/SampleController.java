@@ -22,16 +22,16 @@ public class SampleController {
 	
 	@RequestMapping("doA")
 	public void doA() {
-		logger.info("doA Called....부른다으아");
+		logger.info("doA Called....");
 	}
 	
 	@RequestMapping("doB")
 	public void doB() {
-		logger.info("doB Called....부른다으아");
+		logger.info("doB Called....");
 	}
 	@RequestMapping("doC")
 	public String doC(@ModelAttribute("msg") String msg) {
-		logger.info("doC Called....부른다으아");
+		logger.info("doC Called....");
 		return "result";
 	} 
 	
@@ -43,7 +43,7 @@ public class SampleController {
 		// 를 생성하는 것이다. (String name은 Sample Product로, double price는 10000원으로)
 		// 또한 ProductVO는 따로 설정하지 않으면 앞글자가 소문자로 바뀌게 된다. 그래서 view에 product에 객체로 갖고온다.
 		ProductVO product = new ProductVO("Sample Product", 10000);
-		logger.info("doD Called....부른다으아"); //문장전체를 위치를 바꾸는 것은 "알트키+화살표 위,아래로"하면 바뀐다.
+		logger.info("doD Called...."); //문장전체를 위치를 바꾸는 것은 "알트키+화살표 위,아래로"하면 바뀐다.
 		model.addAttribute(product); 
 		return "productDetail";
 	}
@@ -66,7 +66,7 @@ public class SampleController {
 	} //위에 있는 Rediract가 잘모로겠다면 여서는 JSP로 보여주겠음 (JSP) 위에랑 같은 것이다.
 	@RequestMapping("doY")
 	public void doY(HttpServletResponse res) throws Exception {  //앞글자 조금 적고 컨트롤+스페이스 누르면 옆에 목록창이 뜨는 것에서 지정해줌
-		logger.info("doY Called....부른다으아");
+		logger.info("doY Called....");
 		res.sendRedirect("doC?msg=this is the Massage!! with redirected by doY"); // 여기에 String이 들어오는 것임 //스프링에서는 rttr.addFlashAttribute이 있다. 
 			//http://localhost:8086/web/doC?msg=redirect 를 할경우 메세지가 msg와 redirect가 찍혀서 hello reirect가 찍힌다.
 		    
