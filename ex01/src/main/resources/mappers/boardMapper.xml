@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="board">
+
+	 <insert id="create">
+	 insert into tbl_board (title, content, writer) 
+	 values(#{title},#{content}, #{writer})
+	 </insert>
+	 
+	 <select id="read" resultType="BoardVO">
+	 select 
+	   bno, title, content, writer, regdate, viewcnt 
+	 from 
+	   tbl_board 
+	 where bno = #{bno}
+	 </select>
+	
+	 <update id="update" parameterType="hashmap">
+	 update tbl_board set title =#{title}, content =#{content} 
+	 where bno = #{bno}
+	 </update>
+	
+	 <delete id="delete" parameterType="hashmap">
+	 delete from tbl_board where bno = #{bno}
+	 </delete>
+	
+    <select id="listAll" resultType="BoardVO"> 
+	SELECT BNO
+	     , TITLE
+	     , CONTENT
+	     , WRITER
+	     , REGDATE
+	     , VIEWCNT 
+	  FROM TBL_BOARD 
+	 WHERE BNO &gt; 0 
+  ORDER BY BNO DESC, REGDATE DESC
+	 </select>
+ 
+ 	 <select id="listPage" resultType="BoardVO">
+ 	 SELECT BNO
+ 	      , TITLE
+ 	      , CONTENT
+ 	      , WRITER
+ 	      , REGDATE
+ 	      , VIEWCNT
+ 	   FROM TBL_BOARD
+ 	  WHERE BNO &gt; 0
+      ORDER BY BNO DESC
+      LIMIT #{page}, 10
+ 	 </select>
+ 	 
+ 	 <select id = "listCriteria" resultType="BoardVO">
+ 	 SELECT BNO
+ 	      , TITLE
+ 	      , CONTENT
+ 	      , WRITER
+ 	      , REGDATE
+ 	      , VIEWCNT
+ 	   FROM TBL_BOARD
+ 	  WHERE BNO &gt; 0
+   ORDER BY BNO DESC
+      LIMIT #{pageStart}, #{perPageNum}
+ 	 </select>
+ 	 
+ 	 <select id="countPaging" resultType="int">
+ 	 SELECT COUNT(BNO)
+ 	   FROM TBL_BOARD
+ 	  WHERE BNO &gt; 0
+ 	 </select>
+ 	 
+ 	 <sql id="search">
+ 	 <if test="searchType != null">
+ 	  	<if test="searchType == 't'.toString()">
+ 	  		AND TITLE LIKE CONCAT('%' , #{keyword} , '%' )
+ 	  	</if>
+ 	  	<if test="searchType == 'c'.toString()">
+ 	  		AND CONTENT LIKE CONCAT('%' , #{keyword} , '%' )
+ 	  	</if>
+ 	  	<if test="searchType == 'w'.toString()">
+ 	  		AND WRITER LIKE CONCAT('%' , #{keyword} , '%' )
+ 	  	</if>
+ 	  	<if test="searchType == 'tc'.toString()">
+ 	  		AND TITLE LIKE CONCAT('%' , #{keyword} , '%' )
+ 	  		 OR CONTENT LIKE CONCAT('%' , #{keyword} , '%' )
+ 	  	</if>
+ 	  	<if test="searchType == 'cw'.toString()">
+ 	  		AND CONTENT LIKE CONCAT('%' , #{keyword} , '%' )
+ 	  		 OR WRITER LIKE CONCAT('%' , #{keyword} , '%' )
+ 	  	</if>
+ 	  	<if test="searchType == 'tcw'.toString()">
+ 	  		AND TITLE LIKE CONCAT('%' , #{keyword} , '%' )
+ 	  		 OR CONTENT LIKE CONCAT('%' , #{keyword} , '%' )
+ 	  		 OR WRITER LIKE CONCAT('%' , #{keyword} , '%' )
+ 	  	</if>
+ 	  </if>
+ 	 </sql>
+ 	 
+ 	 <select id = "listSearch" resultType="BoardVO">
+ 	 SELECT BNO
+ 	      , TITLE
+ 	      , CONTENT
+ 	      , WRITER
+ 	      , REGDATE
+ 	      , VIEWCNT
+ 	   FROM TBL_BOARD
+ 	  WHERE BNO &gt; 0
+ 	  <include refid="search"></include>
+   ORDER BY BNO DESC
+      LIMIT #{pageStart}, #{perPageNum}
+ 	 </select>
+ 	 
+ 	 <select id="listSearchCount" resultType="int">
+ 	 SELECT COUNT(BNO)
+ 	   FROM TBL_BOARD
+ 	  WHERE BNO &gt; 0
+ 	  <include refid="search"></include>
+ 	 </select>
+</mapper>

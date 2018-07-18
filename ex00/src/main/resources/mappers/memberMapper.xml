@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+
+<!-- 리소스에서 새로운 mapper폴더를 만들어서 쿼리문들은 이곳에 모아둠 -->
+
+
+    <!--오라클인 경우 쿼리문 : select sysdate() from dual --> 
+<mapper namespace="member">
+
+<select resultType="string" id="getTime"> SELECT NOW() </select>
+
+<!-- 쿼리는 대문자로 컨트롤+시프트+X  // 파라미터는 소문자로도 들어오니까 상관없음-->
+  <insert id="insertMember"> INSERT INTO TBL_MEMBER 
+           ( USERID 
+           , USERPW 
+           , USERNAME 
+           , EMAIL) 
+    VALUES ( #{userid} 
+           , #{userpw} 
+           , #{username} 
+           , #{email})
+  </insert>
+
+</mapper>
