@@ -17,7 +17,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 //root-context에서 알트+엔터를 누르면 path경로가 나옴 그것을 붙이면됨
 
 public class DataSourceTest {
-
 	//DataSOurce indject "DI" 위에 있는 root-context를 데이터소스를 DI
 	@Inject
 	private DataSource ds;
@@ -25,7 +24,6 @@ public class DataSourceTest {
 	@Test //알트+시프트+t
 	public void test() {
 		try {
-			
 			Connection con = ds.getConnection();
 		}
 		catch(Exception e) {

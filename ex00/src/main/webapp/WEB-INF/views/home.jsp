@@ -10,7 +10,7 @@
 $.ajax({
 	  method: "GET",
 	  url: "doJSON",
-	  dataType: "jSON"
+	  dataType: "JSON"
 	  success: function(result){
 		  alert(result.name);
 		  alert(result.["name"]);
