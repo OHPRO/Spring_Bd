@@ -11,7 +11,7 @@ public class MemberVO {
 	private Date updatedate; //처음에는 빨간불이 들어올 것이다. 이유는 Date타입이 없기떄문이다. 
 	                         // 따라서 ctrl+shift+O를 누르고 sql이 아닌 unit을 추가해주면 됨
 	
-	
+	public MemberVO() {} 
 	//값을 자동으로 넣음 ( 알트+시피트+O를 누르고 컨스트럭터를 추가해주면된다 //junit에 전부 입력안해도 된다. 손쉽게하는 튜닝 tip)
 	public MemberVO(String userid, String userpw, String username, String email) {
 		super();

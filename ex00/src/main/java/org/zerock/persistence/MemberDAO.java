@@ -12,7 +12,7 @@ public interface MemberDAO {
 	
 	public void insertMember(MemberVO vo);
 	
-	public MemberVO readmember(String userid) throws Exception;
-	
-	public MemberVO readwithPW(String userid, String userpw) throws Exception;
+	public MemberVO readMember(String userid) throws Exception;
+
+	public MemberVO readWithPW(String userid, String userpw) throws Exception;
 }

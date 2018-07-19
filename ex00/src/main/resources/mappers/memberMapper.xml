@@ -23,5 +23,26 @@
            , #{username} 
            , #{email})
   </insert>
+<!--팩키지명 복사 // # 이라고하면 USERID가 바인딩되고 홋따움표('')가 붙는다 Ex( 'user01') 이렇게 붙는다. 만약 숫자라고 한다면 $를 앞에 표시하면 된다-->
+  <select id="selectMember" resultType="org.zerock.domain.MemberVO">
+    SELECT USERID
+           ,USERNAME
+           ,EMAIL
+           ,RECOATE
+           ,UPDATECOATE
+        FROM TBL_MEMBER
+        WHERE USERID = #{userid}
+  </select>
+
+  <select id="readWithPW" resultType="org.zerock.domain.MemberVO">
+    SELECT USERID
+           ,USERNAME
+           ,EMAIL
+           ,RECOATE
+           ,UPDATECOATE
+        FROM TBL_MEMBER
+        WHERE USERID = #{userid}
+          AND USERPW = #{userpw}
+  </select>
 
 </mapper>
